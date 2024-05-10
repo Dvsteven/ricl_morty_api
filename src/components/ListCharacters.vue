@@ -16,25 +16,32 @@ import { useStore } from 'vuex'
 import CardCharacter from '@/components/CardCharacter'
 
 export default {
-	components: {
-		CardCharacter
-	},
-	SetUp(){
-		const store = useStore()
-		const characters = computed(() => {
-			return store.state.charactersFilter
-		})
-		onUnmounted(() => {
-			store.dispatch('getCharacters')
-		})
+  name: 'Characters',
+  components: {
+    CardCharacter
+  },
+  setup() {
+    const store = useStore()
+    const characters = computed(() => {
+      return store.state.charactersFilter
+    })
 
-		return{
-			characters
-		}
-	}
+    onMounted(() => {
+      store.dispatch('getCharacters')
+    })
+
+    return {
+      characters
+    }
+  }
 }
 </script>
 
 <style>
-
+.characters {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap:3rem;
+	margin: 3rem 0; 
+}
 </style>
